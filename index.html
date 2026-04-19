@@ -1,0 +1,184 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .container { padding: 1.5rem 0; }
+  .trip-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .trip-sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+  .day-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .day-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: var(--border-radius-md); white-space: nowrap; }
+  .badge-free { background: #EAF3DE; color: #3B6D11; }
+  .badge-jungfrau { background: #E6F1FB; color: #185FA5; }
+  .badge-pilatus { background: #EEEDFE; color: #534AB7; }
+  .badge-rest { background: #F1EFE8; color: #5F5E5A; }
+  .badge-depart { background: #FAECE7; color: #993C1D; }
+  .day-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+  .day-date { font-size: 12px; color: var(--color-text-secondary); margin-left: auto; }
+  .item-list { list-style: none; }
+  .item-list li { font-size: 13px; color: var(--color-text-secondary); padding: 3px 0; padding-left: 14px; position: relative; line-height: 1.5; }
+  .item-list li::before { content: '·'; position: absolute; left: 0; color: var(--color-text-tertiary); }
+  .alert-box { background: #FAEEDA; border: 0.5px solid #EF9F27; border-radius: var(--border-radius-md); padding: 10px 14px; margin-top: 8px; font-size: 12px; color: #633806; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-icon { font-size: 14px; flex-shrink: 0; }
+  .hotel-tag { display: inline-block; background: #E1F5EE; color: #0F6E56; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-top: 4px; }
+  .section-divider { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.08em; margin: 1.5rem 0 8px; }
+  .cost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .cost-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+  .cost-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .cost-amount { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+  .cost-note { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+  .cost-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-row-label { color: var(--color-text-secondary); }
+  .cost-row-val { font-weight: 500; color: var(--color-text-primary); }
+  .cost-total { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 0; font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-top: 4px; }
+  .savings-note { font-size: 12px; color: #3B6D11; background: #EAF3DE; border-radius: var(--border-radius-md); padding: 8px 12px; margin-top: 10px; }
+  .timeline-line { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+  .timeline-dot { width: 8px; height: 8px; border-radius: 50%; background: #378ADD; flex-shrink: 0; margin-top: 5px; }
+  .timeline-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+  .timeline-time { font-weight: 500; color: var(--color-text-primary); margin-right: 6px; }
+  .link-btn { display: inline-block; font-size: 12px; color: #185FA5; text-decoration: none; border: 0.5px solid #85B7EB; border-radius: var(--border-radius-md); padding: 3px 10px; margin-top: 6px; }
+  .reminder-card { background: #FCEBEB; border: 0.5px solid #F09595; border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+  .reminder-title { font-size: 14px; font-weight: 500; color: #A32D2D; margin-bottom: 8px; }
+  .reminder-item { font-size: 13px; color: #791F1F; padding: 4px 0; padding-left: 14px; position: relative; }
+  .reminder-item::before { content: '!'; position: absolute; left: 0; font-weight: 500; color: #E24B4A; }
+  .tag-cancel { font-size: 11px; color: #0F6E56; background: #E1F5EE; border-radius: var(--border-radius-md); padding: 1px 7px; margin-left: 6px; }
+</style>
+
+<div class="container">
+  <h2 class="sr-only">Annie 的瑞士行程 2026年6月1日至7日</h2>
+  <div class="trip-title">Annie's Switzerland Trip</div>
+  <div class="trip-sub">6月1日 — 6月7日 · 住宿：Zoe 家（Lenzburg）</div>
+
+  <div class="reminder-card">
+    <div class="reminder-title">記得要買 / 注意事項</div>
+    <div class="reminder-item">買 Swiss Half Fare Card — CHF 150（<a href="https://www.swissrailways.com/en/buy-swiss-half-fare-card" class="link-btn" style="margin-top:0; margin-left:4px;">購買連結</a>）</div>
+    <div class="reminder-item">少女峰票還沒買 — Jungfraujoch half fare 2nd class: CHF 130.60</div>
+    <div class="reminder-item">Pilatus Golden Roundtrip 票 — CHF 59.90（半價）</div>
+    <div class="reminder-item">確認 6/8 飛往巴黎班機時間 → 需要搭早班車到蘇黎世機場（38分鐘）</div>
+  </div>
+
+  <div class="section-divider">行程</div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-free">自由行</span>
+      <span class="day-title">抵達 · 自由探索</span>
+      <span class="day-date">6/1（一）</span>
+    </div>
+    <ul class="item-list">
+      <li>抵達瑞士，前往 Zoe 家（Lenzburg）</li>
+      <li>Zoe 晚上 8 點多才到家，白天可以先把行李放好四處逛逛</li>
+      <li>可考慮去 <strong style="font-weight:500">Zürich</strong>：搭船遊湖（很便宜）、老城區散步</li>
+    </ul>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-free">自由行</span>
+      <span class="day-title">Bern / Basel / Zürich 任選</span>
+      <span class="day-date">6/2 — 6/3（二三）</span>
+    </div>
+    <ul class="item-list">
+      <li><strong style="font-weight:500">伯恩（Bern）</strong>：首都，熊公園、玫瑰花園、中世紀拱廊老城</li>
+      <li><strong style="font-weight:500">巴塞爾（Basel）</strong>：萊茵河畔、豐富博物館</li>
+      <li><strong style="font-weight:500">蘇黎世（Zürich）</strong>：搭船遊湖最推薦，票價實惠</li>
+    </ul>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-jungfrau">少女峰 Day 1</span>
+      <span class="day-title">前往 Lauterbrunnen</span>
+      <span class="day-date">6/4（四）</span>
+    </div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">出發</span>Lenzburg → Lauterbrunnen（約 2.5 小時，轉車方便）</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">16:00</span>Check-in Hotel Horner</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">下午</span>看 Staubbach 瀑布、輕鬆散步小鎮</div></div>
+    <span class="hotel-tag">Hotel Hornerpub · CHF 117（已訂，5/30 前可免費取消）<span class="tag-cancel">可取消</span></span>
+    <div class="alert-box" style="margin-top:8px;"><span class="alert-icon">🎫</span><span>少女峰票尚未購買 — Half Fare 2nd Class: <strong style="font-weight:500">CHF 130.60</strong>，記得提前買！</span></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-jungfrau">少女峰 Day 2</span>
+      <span class="day-title">Jungfraujoch 山頂</span>
+      <span class="day-date">6/5（五）</span>
+    </div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">07:30</span>從 Lauterbrunnen 出發上山</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">10:00</span>抵達 Jungfraujoch（3,454m）</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">10:30–13:00</span>山頂停留：冰宮、斯芬克斯觀景台、雪地漫步</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">13:00</span>開始下山</div></div>
+    <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-text"><span class="timeline-time">15:00–17:30</span>回 Lenzburg，check-out Zoe 家</div></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-pilatus">皮拉圖斯</span>
+      <span class="day-title">Pilatus Golden Roundtrip</span>
+      <span class="day-date">6/6（六）</span>
+    </div>
+    <ul class="item-list">
+      <li>從 Luzern 出發，搭世界最陡齒軌火車上山</li>
+      <li>山頂景色壯觀（2,132m），可以看到多座阿爾卑斯山峰</li>
+      <li>Golden Roundtrip：去程齒軌火車 + 回程纜車 + 遊船</li>
+    </ul>
+    <div class="alert-box"><span class="alert-icon">🎫</span><span>Outward journey half fare price: <strong style="font-weight:500">CHF 59.90</strong>，記得買票！</span></div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-rest">休息日</span>
+      <span class="day-title">在 Zoe 家放鬆</span>
+      <span class="day-date">6/7（日）</span>
+    </div>
+    <ul class="item-list">
+      <li>瑞士星期日幾乎所有店都關閉</li>
+      <li>在家洗衣服、整理行李、睡覺補眠</li>
+      <li>為隔天早班車做準備</li>
+    </ul>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <span class="day-badge badge-depart">離開</span>
+      <span class="day-title">前往蘇黎世機場 → 巴黎</span>
+      <span class="day-date">6/8（一）</span>
+    </div>
+    <div class="timeline-line"><div class="timeline-dot" style="background:#D85A30;"></div><div class="timeline-text"><span class="timeline-time">一早</span>Lenzburg → Zürich Flughafen（38 分鐘）</div></div>
+    <div class="timeline-line"><div class="timeline-dot" style="background:#D85A30;"></div><div class="timeline-text"><span class="timeline-time">07:xx</span>搭機飛往巴黎 ✈️</div></div>
+    <a href="https://www.sbb.ch/de?stops=Lenzburg_I8502119~Z%C3%BCrich+Flughafen_I8503016&day=2026-06-07&time=03_39&moment=dep&trip=1" class="link-btn">查看 SBB 火車時刻</a>
+  </div>
+
+  <div class="section-divider">費用概況</div>
+
+  <div class="cost-grid">
+    <div class="cost-card">
+      <div class="cost-label">住宿</div>
+      <div class="cost-amount">CHF 117</div>
+      <div class="cost-note">Lauterbrunnen 1晚</div>
+    </div>
+    <div class="cost-card">
+      <div class="cost-label">交通票</div>
+      <div class="cost-amount">CHF 341</div>
+      <div class="cost-note">半價卡＋主要景點票</div>
+    </div>
+    <div class="cost-card">
+      <div class="cost-label">其他估計</div>
+      <div class="cost-amount">CHF 150+</div>
+      <div class="cost-note">餐飲、零散交通</div>
+    </div>
+  </div>
+
+  <div class="day-card" style="margin-bottom:12px;">
+    <div class="cost-row"><span class="cost-row-label">Swiss Half Fare Card</span><span class="cost-row-val">CHF 150.00</span></div>
+    <div class="cost-row"><span class="cost-row-label">少女峰票（half fare 2nd class）</span><span class="cost-row-val">CHF 130.60</span></div>
+    <div class="cost-row"><span class="cost-row-label">Pilatus Golden Roundtrip（half fare）</span><span class="cost-row-val">CHF 59.90</span></div>
+    <div class="cost-row"><span class="cost-row-label">Hotel Hornerpub（Lauterbrunnen 1晚）</span><span class="cost-row-val">CHF 117.00</span></div>
+    <div class="cost-row"><span class="cost-row-label">市內交通 / 蘇黎世遊湖 / 雜費（估計）</span><span class="cost-row-val">CHF 100–150</span></div>
+    <div class="cost-row"><span class="cost-row-label">餐飲（估計，7天）</span><span class="cost-row-val">CHF 200–300</span></div>
+    <div class="cost-total"><span>總計估計</span><span>CHF 757 – 907</span></div>
+  </div>
+
+  <div class="savings-note">住宿全程在 Zoe 家免費，節省約 CHF 600–900（7晚）。 買 Half Fare Card 後少女峰省下約 CHF 130、Pilatus 省下約 CHF 60，抵掉卡費後仍划算。</div>
+</div>
